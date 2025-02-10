@@ -12,11 +12,14 @@ module.exports = {
   },
   devtool: "eval-source-map",
   devServer: {
+    static: './dist',
     watchFiles: ["./src/template.html"],
+    hot: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html",
+      title: 'Development',
     }),
   ],
   module: {
@@ -32,6 +35,18 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(csv|tsv)$/i,
+        use: ['csv-loader'],
+      },
+      {
+        test: /\.xml$/i,
+        use: ['xml-loader'],
       },
     ],
   },
